@@ -13,6 +13,7 @@ struct State {
     ia::World world;
     bool want = false;    // what the user is really holding
     bool actual = false;  // what we've fed to the game
+    bool applying = false; // true while WE call the game's handleButton (that call goes through our own hook!)
 };
 State g;
 
@@ -144,13 +145,19 @@ bool isActiveLayer(GJBaseGameLayer* gl) {
 
 class $modify(AssistGL, GJBaseGameLayer) {
     void handleButton(bool down, int button, bool isPlayer1) {
-        if (button == 1 && isPlayer1) {
-            g.want = down;
-            if (isActiveLayer(this) && !m_isPlatformer) {
-                return; // swallow; processCommands applies the final input
-            }
-            g.actual = down;
+        // our own call below re-enters this hook: let it straight through to the original
+        if (g.applying || button != 1 || !isPlayer1) {
+            GJBaseGameLayer::handleButton(down, button, isPlayer1);
+            return;
         }
+        g.want = down;
+        if (isActiveLayer(this) && !m_isPlatformer && m_player1 && !m_player1->m_isDead) {
+            bool d = decide(m_player1, this, down);
+            g.actual = d;
+            GJBaseGameLayer::handleButton(d, 1, true);
+            return;
+        }
+        g.actual = down;
         GJBaseGameLayer::handleButton(down, button, isPlayer1);
     }
 
@@ -158,7 +165,9 @@ class $modify(AssistGL, GJBaseGameLayer) {
         if (isActiveLayer(this) && !m_isPlatformer && m_player1 && !m_player1->m_isDead) {
             bool d = decide(m_player1, this, g.want);
             if (d != g.actual) {
+                g.applying = true;
                 GJBaseGameLayer::handleButton(d, 1, true);
+                g.applying = false;
                 g.actual = d;
             }
         }

@@ -6,7 +6,7 @@
 	},
 	"id": "ninh.input-assist",
 	"name": "Input Assist",
-	"version": "v0.2.0",
+	"version": "v0.2.1",
 	"developer": "Ninh",
 	"description": "Chặn input sai khi sắp đụng gai/block, tự tap khi cần. Hỗ trợ cube, ship, ufo, ball, robot, wave (classic).",
 	"settings": {
