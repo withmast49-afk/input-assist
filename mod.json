@@ -1,0 +1,84 @@
+{
+	"geode": "v5.11.2",
+	"gd": {
+		"win": "2.2081",
+		"android": "2.2081"
+	},
+	"id": "ninh.input-assist",
+	"name": "Input Assist",
+	"version": "v0.2.0",
+	"developer": "Ninh",
+	"description": "Chặn input sai khi sắp đụng gai/block, tự tap khi cần. Hỗ trợ cube, ship, ufo, ball, robot, wave (classic).",
+	"settings": {
+		"enabled": {
+			"type": "bool",
+			"name": "Bật Input Assist",
+			"description": "Công tắc tổng.",
+			"default": true
+		},
+		"allow-block": {
+			"type": "bool",
+			"name": "Chặn input nguy hiểm",
+			"description": "Nếu input của ông dẫn tới chết mà input ngược lại an toàn thì đổi input.",
+			"default": true
+		},
+		"allow-auto-tap": {
+			"type": "bool",
+			"name": "Tự tap khi sắp chết",
+			"description": "Nếu ông không bấm mà sắp chết, và bấm thì an toàn thì tự bấm.",
+			"default": true
+		},
+		"lookahead-ms": {
+			"type": "int",
+			"name": "Lookahead (ms)",
+			"description": "Dự đoán trước bao nhiêu mili giây.",
+			"default": 80,
+			"min": 10,
+			"max": 300
+		},
+		"hitbox-scale": {
+			"type": "float",
+			"name": "Hitbox scale (gai)",
+			"description": "Nhân với hitbox người chơi khi so với gai. 1.0 là chuẩn; giảm xuống nếu bị can thiệp nhầm.",
+			"default": 1.0,
+			"min": 0.3,
+			"max": 1.2
+		},
+		"assist-cube": {
+			"type": "bool",
+			"name": "Cube",
+			"description": "Hỗ trợ cube.",
+			"default": true
+		},
+		"assist-ship": {
+			"type": "bool",
+			"name": "Ship",
+			"description": "Hỗ trợ ship.",
+			"default": true
+		},
+		"assist-ufo": {
+			"type": "bool",
+			"name": "UFO",
+			"description": "Hỗ trợ UFO.",
+			"default": true
+		},
+		"assist-wave": {
+			"type": "bool",
+			"name": "Wave",
+			"description": "Hỗ trợ wave.",
+			"default": true
+		},
+		"assist-ball": {
+			"type": "bool",
+			"name": "Ball",
+			"description": "Hỗ trợ ball.",
+			"default": true
+		},
+		"assist-robot": {
+			"type": "bool",
+			"name": "Robot",
+			"description": "Hỗ trợ robot.",
+			"default": true
+		}
+	}
+}
